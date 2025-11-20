@@ -28,6 +28,7 @@ async function getDataCategories() {
     console.error(error.message);
   }
 }
+
 // On récupére les élements du DOM et on affiche le resultats du retour de l'API pour image et titre.
 
 const gallery = document.querySelector(".gallery");
@@ -38,6 +39,7 @@ async function showResult() {
   function createGallery(results) {
     results.forEach((element) => {
       let figure = document.createElement("figure");
+      figure.dataset.categoryId = element.categoryId;
       gallery.appendChild(figure);
       let imgGallery = document.createElement("img");
       figure.appendChild(imgGallery);
@@ -52,20 +54,68 @@ async function showResult() {
 }
 
 showResult();
-showFilters();
+showFilters().then(() => {
+  galleryFiltered();
+});
 
 // on creer les boutons de filtrages des elements
 async function showFilters() {
-  let results = await getDataCategories();
+  let resultsCat = await getDataCategories();
   let btnFilterAll = document.createElement("button");
   filters.appendChild(btnFilterAll);
   btnFilterAll.innerText = "Tous";
-  function createFilters(results) {
-    results.forEach((element) => {
+  btnFilterAll.id = "btnAll";
+  function createFilters(resultsCat) {
+    resultsCat.forEach((element) => {
       let btnFilters = document.createElement("button");
       filters.appendChild(btnFilters);
       btnFilters.innerText = element.name;
+      btnFilters.id = `element_${element.id}`;
     });
   }
-  createFilters(results);
+  createFilters(resultsCat);
+}
+
+/* On recupere les boutons precedement créer et on set up l'affichage des elements en fonction des filtres selectionés*/
+function galleryFiltered() {
+  let elements = document.querySelectorAll(".gallery figure");
+  let btnFilterAll = document.querySelector("#btnAll");
+  let btnObjects = document.querySelector("#element_1");
+  let btnFlats = document.querySelector("#element_2");
+  let btnHotels = document.querySelector("#element_3");
+  btnFilterAll.addEventListener("click", () => {
+    elements.forEach((element) => {
+      element.style.display = "block";
+    });
+  });
+
+  btnObjects.addEventListener("click", () => {
+    elements.forEach((element) => {
+      if (element.dataset.categoryId != 1) {
+        element.style.display = "none";
+      } else {
+        element.style.display = "block";
+      }
+    });
+  });
+
+  btnFlats.addEventListener("click", () => {
+    elements.forEach((element) => {
+      if (element.dataset.categoryId != 2) {
+        element.style.display = "none";
+      } else {
+        element.style.display = "block";
+      }
+    });
+  });
+
+  btnHotels.addEventListener("click", () => {
+    elements.forEach((element) => {
+      if (element.dataset.categoryId != 3) {
+        element.style.display = "none";
+      } else {
+        element.style.display = "block";
+      }
+    });
+  });
 }
