@@ -2,7 +2,9 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
+* {
+  box-sizing: border-box;
+}
 html,
 body,
 div,
@@ -292,4 +294,69 @@ footer nav ul {
   width: 100%;
   justify-content: center;
   gap: 10px;
+}
+
+/**** page de login ****/
+
+.page-html,
+.page-body,
+.page-main {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0;
+  margin: auto;
+  max-width: 1140px;
+}
+
+.wrapper {
+  box-sizing: border-box;
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.page-body form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.page-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+}
+
+#btn-connect {
+  background-color: #1d6154;
+  color: white;
+  border: 1px solid #1d6154;
+  border-radius: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.page-main h1 {
+  color: #1d6154;
+  text-align: center;
+  font-weight: 700;
+}
+
+#password,
+#email {
+  width: 380px;
+  height: 50px;
+  border: none;
+  box-shadow: 0 4px 14px 0 #00000017;
 }
