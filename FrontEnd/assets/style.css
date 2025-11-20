@@ -281,6 +281,12 @@ footer nav ul {
   background-color: #1d6154;
   color: white;
 }
+
+.filters .active-filter {
+  background-color: #1d6154;
+  color: white;
+}
+
 .filters {
   display: flex;
   width: 100%;

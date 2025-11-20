@@ -54,9 +54,7 @@ async function showResult() {
 }
 
 showResult();
-showFilters().then(() => {
-  galleryFiltered();
-});
+showFilters();
 
 // on creer les boutons de filtrages des elements
 async function showFilters() {
@@ -65,57 +63,36 @@ async function showFilters() {
   filters.appendChild(btnFilterAll);
   btnFilterAll.innerText = "Tous";
   btnFilterAll.id = "btnAll";
-  function createFilters(resultsCat) {
-    resultsCat.forEach((element) => {
-      let btnFilters = document.createElement("button");
-      filters.appendChild(btnFilters);
-      btnFilters.innerText = element.name;
-      btnFilters.id = `element_${element.id}`;
+  btnFilterAll.addEventListener("click", () => {
+    let elements = document.querySelectorAll(".gallery figure");
+    elements.forEach((el) => {
+      el.style.display = "block";
     });
-  }
+  });
   createFilters(resultsCat);
 }
 
-/* On recupere les boutons precedement créer et on set up l'affichage des elements en fonction des filtres selectionés*/
-function galleryFiltered() {
-  let elements = document.querySelectorAll(".gallery figure");
-  let btnFilterAll = document.querySelector("#btnAll");
-  let btnObjects = document.querySelector("#element_1");
-  let btnFlats = document.querySelector("#element_2");
-  let btnHotels = document.querySelector("#element_3");
-  btnFilterAll.addEventListener("click", () => {
-    elements.forEach((element) => {
-      element.style.display = "block";
-    });
-  });
-
-  btnObjects.addEventListener("click", () => {
-    elements.forEach((element) => {
-      if (element.dataset.categoryId != 1) {
-        element.style.display = "none";
-      } else {
-        element.style.display = "block";
-      }
-    });
-  });
-
-  btnFlats.addEventListener("click", () => {
-    elements.forEach((element) => {
-      if (element.dataset.categoryId != 2) {
-        element.style.display = "none";
-      } else {
-        element.style.display = "block";
-      }
-    });
-  });
-
-  btnHotels.addEventListener("click", () => {
-    elements.forEach((element) => {
-      if (element.dataset.categoryId != 3) {
-        element.style.display = "none";
-      } else {
-        element.style.display = "block";
-      }
+function createFilters(resultsCat) {
+  resultsCat.forEach((element) => {
+    let btnFilters = document.createElement("button");
+    filters.appendChild(btnFilters);
+    btnFilters.innerText = element.name;
+    btnFilters.id = `element_${element.id}`;
+    btnFilters.addEventListener("click", (event) => {
+      // document.querySelectorAll(".filters button").forEach((btn) => {
+      //   btn.classList.remove("active-filter");
+      // });
+      // event.target.classList.add("active-filter");
+      let elements = document.querySelectorAll(".gallery figure");
+      elements.forEach((el) => {
+        if (el.dataset.categoryId != element.id) {
+          el.style.display = "none";
+        } else {
+          el.style.display = "block";
+        }
+      });
     });
   });
 }
+
+/* On recupere les boutons precedement créer et on set up l'affichage des elements en fonction des filtres selectionés*/
