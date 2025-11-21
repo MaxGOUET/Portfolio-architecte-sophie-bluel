@@ -338,7 +338,8 @@ footer nav ul {
   justify-content: flex-end;
 }
 
-.page-body form {
+.page-body form,
+input {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -351,13 +352,19 @@ footer nav ul {
   gap: 25px;
 }
 
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 #btn-connect {
   background-color: #1d6154;
   color: white;
   border: 1px solid #1d6154;
-  border-radius: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  width: 180px;
+  height: 35px;
+  border-radius: 60px;
 }
 .page-main h1 {
   color: #1d6154;
