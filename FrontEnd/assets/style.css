@@ -379,3 +379,22 @@ input {
   border: none;
   box-shadow: 0 4px 14px 0 #00000017;
 }
+
+#login {
+  display: block;
+}
+
+#logout {
+  display: none;
+}
+.projects {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+.modify {
+  display: none;
+  align-items: center;
+  gap: 5px;
+}

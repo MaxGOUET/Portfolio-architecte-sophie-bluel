@@ -36,25 +36,23 @@ const filters = document.querySelector(".filters");
 
 async function showResult() {
   let results = await getDataWorks();
-  function createGallery(results) {
-    results.forEach((element) => {
-      let figure = document.createElement("figure");
-      figure.dataset.categoryId = element.categoryId;
-      gallery.appendChild(figure);
-      let imgGallery = document.createElement("img");
-      figure.appendChild(imgGallery);
-      imgGallery.src = element.imageUrl;
-      imgGallery.alt = element.title;
-      let figCaption = document.createElement("figcaption");
-      figure.appendChild(figCaption);
-      figCaption.innerText = element.title;
-    });
-  }
   createGallery(results);
 }
 
-showResult();
-showFilters();
+function createGallery(results) {
+  results.forEach((element) => {
+    let figure = document.createElement("figure");
+    figure.dataset.categoryId = element.categoryId;
+    gallery.appendChild(figure);
+    let imgGallery = document.createElement("img");
+    figure.appendChild(imgGallery);
+    imgGallery.src = element.imageUrl;
+    imgGallery.alt = element.title;
+    let figCaption = document.createElement("figcaption");
+    figure.appendChild(figCaption);
+    figCaption.innerText = element.title;
+  });
+}
 
 // on creer les boutons de filtrages des elements
 async function showFilters() {
@@ -95,4 +93,25 @@ function createFilters(resultsCat) {
   });
 }
 
-/* On recupere les boutons precedement créer et on set up l'affichage des elements en fonction des filtres selectionés*/
+// On verifie si le token est present dans le local storage et on affiches les elements si oui
+
+let token = localStorage.getItem("token");
+
+if (token === null) {
+  showResult();
+  showFilters();
+} else {
+  showResult();
+  log();
+}
+function log() {
+  let logout = document.getElementById("logout");
+  let login = document.getElementById("login");
+  let modify = document.querySelector(".modify");
+  logout.style.display = "block";
+  login.style.display = "none";
+  modify.style.display = "flex";
+  logout.addEventListener("click", () => {
+    localStorage.clear("");
+  });
+}
