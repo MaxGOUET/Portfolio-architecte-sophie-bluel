@@ -108,9 +108,11 @@ function log() {
   let logout = document.getElementById("logout");
   let login = document.getElementById("login");
   let modify = document.querySelector(".modify");
+  let edition = document.querySelector(".edition");
   logout.style.display = "block";
   login.style.display = "none";
   modify.style.display = "flex";
+  edition.style.display = "flex";
   logout.addEventListener("click", () => {
     localStorage.clear("");
   });

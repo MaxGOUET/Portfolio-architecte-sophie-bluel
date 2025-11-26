@@ -398,3 +398,14 @@ input {
   align-items: center;
   gap: 5px;
 }
+.edition {
+  margin: 0;
+  padding: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: black;
+  height: 60px;
+  gap: 10px;
+}
