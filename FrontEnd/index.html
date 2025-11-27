@@ -20,6 +20,7 @@
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
     <script src="script.js" defer></script>
+    <script src="modal.js" defer></script>
   </head>
   <body>
     <div class="edition">
@@ -87,6 +88,21 @@
           <input type="submit" value="Envoyer" />
         </form>
       </section>
+
+      <dialog>
+        <div class="modal">
+          <div class="modal-header">
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+          <div class="modal-main">
+            <h3>Galerie photo</h3>
+            <div class="picture-remove"></div>
+          </div>
+          <div class="modal-footer">
+            <button>Ajouter une photo</button>
+          </div>
+        </div>
+      </dialog>
     </main>
 
     <footer>

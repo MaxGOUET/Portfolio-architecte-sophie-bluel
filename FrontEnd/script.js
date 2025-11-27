@@ -37,6 +37,7 @@ const filters = document.querySelector(".filters");
 async function showResult() {
   let results = await getDataWorks();
   createGallery(results);
+  createGalleryModal(results);
 }
 
 function createGallery(results) {
