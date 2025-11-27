@@ -29,5 +29,11 @@ function createGalleryModal(results) {
     figure.appendChild(imgGallery);
     imgGallery.src = element.imageUrl;
     imgGallery.alt = element.title;
+    let removeIcon = document.createElement("i");
+    figure.appendChild(removeIcon);
+    removeIcon.className = "fa-solid fa-trash-can";
   });
 }
+/** ajout de l'eventlistener sur l'icone */
+function removeImg() {}
+removeIcon.addEventListener("click", () => {});
