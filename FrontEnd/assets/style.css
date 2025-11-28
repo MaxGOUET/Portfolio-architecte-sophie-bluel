@@ -425,12 +425,23 @@ dialog::backdrop {
   justify-content: space-between;
   align-items: center;
 }
+.modal-main2 {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
 .modal-header {
   width: 100%;
-  text-align: right;
   padding-right: 15px;
+  padding-left: 15px;
   padding-top: 15px;
+  display: flex;
+  justify-content: flex-end;
 }
+.fa-arrow-left {
+  display: none;
+}
+
 .modal-main {
   padding-left: 100px;
   padding-right: 100px;
