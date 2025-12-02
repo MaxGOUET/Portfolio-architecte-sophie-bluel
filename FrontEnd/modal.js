@@ -25,7 +25,6 @@ function modalTwo() {
 }
 
 showModify.addEventListener("click", () => {
-  modalOne();
   dialog.showModal();
 });
 
@@ -39,24 +38,6 @@ backDrop.addEventListener("click", (event) => {
   }
 });
 /** on ajoute les elements works avec fetch */
-let pictureRemove = document.querySelector(".picture-remove");
-function createGalleryModal(results) {
-  results.forEach((element) => {
-    let figure = document.createElement("figure");
-    figure.dataset.categoryId = element.categoryId;
-    pictureRemove.appendChild(figure);
-    let imgGallery = document.createElement("img");
-    figure.appendChild(imgGallery);
-    imgGallery.src = element.imageUrl;
-    imgGallery.alt = element.title;
-    let removeIcon = document.createElement("i");
-    figure.appendChild(removeIcon);
-    removeIcon.className = "fa-solid fa-trash-can";
-  });
-}
-/** ajout de l'eventlistener sur l'icone */
-// function removeImg() {}
-// removeIcon.addEventListener("click", () => {});
 
 addPicture.addEventListener("click", () => {
   modalTwo();
@@ -64,3 +45,4 @@ addPicture.addEventListener("click", () => {
 leftIcon.addEventListener("click", () => {
   modalOne();
 });
+/*** on supprime les elements */

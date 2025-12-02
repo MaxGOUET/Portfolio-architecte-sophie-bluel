@@ -35,12 +35,13 @@ const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters");
 
 async function showResult() {
-  let results = await getDataWorks();
-  createGallery(results);
-  createGalleryModal(results);
+  createGallery();
+  createGalleryModal();
 }
 
-function createGallery(results) {
+async function createGallery() {
+  gallery.innerHTML = "";
+  let results = await getDataWorks();
   results.forEach((element) => {
     let figure = document.createElement("figure");
     figure.dataset.categoryId = element.categoryId;
@@ -52,6 +53,45 @@ function createGallery(results) {
     let figCaption = document.createElement("figcaption");
     figure.appendChild(figCaption);
     figCaption.innerText = element.title;
+  });
+}
+let galleryModify = document.querySelector(".picture-remove");
+async function createGalleryModal() {
+  galleryModify.innerHTML = "";
+  let results = await getDataWorks();
+  results.forEach((element) => {
+    let figure = document.createElement("figure");
+    figure.dataset.workId = element.id;
+    galleryModify.appendChild(figure);
+    let imgGallery = document.createElement("img");
+    figure.appendChild(imgGallery);
+    imgGallery.src = element.imageUrl;
+    imgGallery.alt = element.title;
+    let removeIcon = document.createElement("i");
+    figure.appendChild(removeIcon);
+    removeIcon.className = "fa-solid fa-trash-can";
+  });
+  removePicture();
+}
+
+function removePicture() {
+  const trashCan = document.querySelectorAll(".picture-remove i");
+  trashCan.forEach((el) => {
+    el.addEventListener("click", (event) => {
+      let iPicture = event.target.parentNode.dataset.workId;
+      console.log(iPicture);
+      fetch(`http://localhost:5678/api/works/${iPicture}`, {
+        method: "DELETE",
+        headers: { accept: "*/*", Authorization: `Bearer ${token}` },
+      }).then((response) => {
+        response.json();
+        if (response.status == 204) {
+          showResult();
+        } else {
+          console.log(response);
+        }
+      });
+    });
   });
 }
 
@@ -78,10 +118,10 @@ function createFilters(resultsCat) {
     btnFilters.innerText = element.name;
     btnFilters.id = `element_${element.id}`;
     btnFilters.addEventListener("click", (event) => {
-      // document.querySelectorAll(".filters button").forEach((btn) => {
-      //   btn.classList.remove("active-filter");
-      // });
-      // event.target.classList.add("active-filter");
+      document.querySelectorAll(".filters button").forEach((btn) => {
+        btn.classList.remove("active-filter");
+      });
+      event.target.classList.add("active-filter");
       let elements = document.querySelectorAll(".gallery figure");
       elements.forEach((el) => {
         if (el.dataset.categoryId != element.id) {
@@ -115,6 +155,6 @@ function log() {
   modify.style.display = "flex";
   edition.style.display = "flex";
   logout.addEventListener("click", () => {
-    localStorage.clear("");
+    localStorage.removeItem("token");
   });
 }
