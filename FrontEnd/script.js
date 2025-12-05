@@ -34,11 +34,11 @@ async function getDataCategories() {
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters");
 
-async function showResult() {
+function showResult() {
   createGallery();
   createGalleryModal();
 }
-
+/**affichage de la gallerie */
 async function createGallery() {
   gallery.innerHTML = "";
   let results = await getDataWorks();
@@ -55,6 +55,7 @@ async function createGallery() {
     figCaption.innerText = element.title;
   });
 }
+/**modale */
 let galleryModify = document.querySelector(".picture-remove");
 async function createGalleryModal() {
   galleryModify.innerHTML = "";
@@ -79,7 +80,6 @@ function removePicture() {
   trashCan.forEach((el) => {
     el.addEventListener("click", (event) => {
       let iPicture = event.target.parentNode.dataset.workId;
-      console.log(iPicture);
       fetch(`http://localhost:5678/api/works/${iPicture}`, {
         method: "DELETE",
         headers: { accept: "*/*", Authorization: `Bearer ${token}` },
@@ -98,6 +98,11 @@ function removePicture() {
 // on creer les boutons de filtrages des elements
 async function showFilters() {
   let resultsCat = await getDataCategories();
+
+  createFilters(resultsCat);
+}
+
+function createFilters(resultsCat) {
   let btnFilterAll = document.createElement("button");
   filters.appendChild(btnFilterAll);
   btnFilterAll.innerText = "Tous";
@@ -108,10 +113,6 @@ async function showFilters() {
       el.style.display = "block";
     });
   });
-  createFilters(resultsCat);
-}
-
-function createFilters(resultsCat) {
   resultsCat.forEach((element) => {
     let btnFilters = document.createElement("button");
     filters.appendChild(btnFilters);
@@ -121,7 +122,7 @@ function createFilters(resultsCat) {
       document.querySelectorAll(".filters button").forEach((btn) => {
         btn.classList.remove("active-filter");
       });
-      event.target.classList.add("active-filter");
+      event.target.classList.toggle("active-filter");
       let elements = document.querySelectorAll(".gallery figure");
       elements.forEach((el) => {
         if (el.dataset.categoryId != element.id) {
