@@ -14,8 +14,15 @@ form.addEventListener("submit", (event) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      localStorage.setItem("token", data.token);
-      window.location = "index.html";
-    })
-    .catch((error) => console.log(error));
+      if (data.token !== undefined) {
+        localStorage.setItem("token", data.token);
+        window.location = "index.html";
+      } else {
+        let errorDiv = document.querySelector(".error");
+        let errorMessage = document.createElement("p");
+        errorMessage.classList = "error-message";
+        errorDiv.appendChild(errorMessage);
+        errorMessage.innerText = "Erreur dans l’identifiant ou le mot de passe";
+      }
+    });
 });
