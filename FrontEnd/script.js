@@ -108,6 +108,10 @@ function createFilters(resultsCat) {
   btnFilterAll.innerText = "Tous";
   btnFilterAll.id = "btnAll";
   btnFilterAll.addEventListener("click", () => {
+    document.querySelectorAll(".filters button").forEach((btn) => {
+      btn.classList.remove("active-filter");
+    });
+    btnFilterAll.classList.toggle("active-filter");
     let elements = document.querySelectorAll(".gallery figure");
     elements.forEach((el) => {
       el.style.display = "block";
