@@ -92,17 +92,52 @@
       <dialog>
         <div class="modal">
           <div class="modal-header">
-            <i class="fa-solid fa-arrow-left"></i>
             <i class="fa-solid fa-xmark"></i>
           </div>
           <div class="modal-main">
             <h3>Galerie photo</h3>
             <div class="picture-remove"></div>
           </div>
-          <div class="modal-main2"></div>
+
           <div class="modal-footer">
             <button>Ajouter une photo</button>
           </div>
+        </div>
+        <div class="modalTwo">
+          <form action="">
+            <div class="modal-header">
+              <i class="fa-solid fa-arrow-left"></i>
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="modal-main">
+              <h3>Ajout photo</h3>
+              <div class="picture-add">
+                <div class="drop-zone">
+                  <label for="image-upload" class="image-upload-label">
+                    <div class="image-upload-icon">
+                      <i class="fa-regular fa-image"></i>
+                    </div>
+                    <input
+                      type="file"
+                      id="image-upload"
+                      accept="image/png, image/jpeg"
+                    />
+                    <button>+ Ajout photo</button>
+                  </label>
+                  <p>jpg, png : 4mo max</p>
+                </div>
+                <div class="title-categories">
+                  <label for="title">Titre</label>
+                  <input type="text" name="title" id="title" />
+                  <label for="categories">Catégorie</label>
+                  <select name="categories" id="categories"></select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button>Valider</button>
+            </div>
+          </form>
         </div>
       </dialog>
     </main>

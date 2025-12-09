@@ -37,6 +37,7 @@ const filters = document.querySelector(".filters");
 function showResult() {
   createGallery();
   createGalleryModal();
+  getCategoriesList();
 }
 /**affichage de la gallerie */
 async function createGallery() {
@@ -162,4 +163,17 @@ function log() {
   logout.addEventListener("click", () => {
     localStorage.removeItem("token");
   });
+}
+/** on recupére les catégories pour les afficher dans la liste déroulante */
+
+async function getCategoriesList() {
+  const categoriesSelect = document.getElementById("categories");
+  let resultsCat = await getDataCategories();
+  resultsCat.forEach((element) => {
+    let option = document.createElement("option");
+    option.value = element.id;
+    option.innerText = element.name;
+    categoriesSelect.appendChild(option);
+  });
+  categoriesSelect.value = "";
 }

@@ -6,22 +6,17 @@ const closeModal = document.querySelector(".fa-xmark");
 const backDrop = document.querySelector("dialog");
 const addPicture = document.querySelector(".modal-footer button");
 const leftIcon = document.querySelector(".fa-arrow-left");
-const modalHeader = document.querySelector(".modal-header");
-const modalMain = document.querySelector(".modal-main");
-const modalMain2 = document.querySelector(".modal-main2");
+const modalPageOne = document.querySelector(".modal");
+const modalPageTwo = document.querySelector(".modalTwo");
 
 function modalOne() {
-  modalHeader.style.justifyContent = "flex-end";
-  leftIcon.style.display = "none";
-  modalMain.style.display = "block";
-  modalMain2.style.display = "none";
+  modalPageOne.style.display = "flex";
+  modalPageTwo.style.display = "none";
 }
 
 function modalTwo() {
-  modalHeader.style.justifyContent = "space-between";
-  leftIcon.style.display = "block";
-  modalMain.style.display = "none";
-  modalMain2.style.display = "block";
+  modalPageOne.style.display = "none";
+  modalPageTwo.style.display = "flex";
 }
 
 showModify.addEventListener("click", () => {

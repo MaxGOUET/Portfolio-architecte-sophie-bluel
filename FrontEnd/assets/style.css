@@ -424,11 +424,15 @@ dialog::backdrop {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  width: 590px;
+  height: 615px;
 }
-.modal-main2 {
+.modalTwo {
   display: none;
   flex-direction: column;
   align-items: center;
+  width: 590px;
+  height: 615px;
 }
 .modal-header {
   width: 100%;
@@ -438,18 +442,22 @@ dialog::backdrop {
   display: flex;
   justify-content: flex-end;
 }
-.fa-arrow-left {
-  display: none;
+.modalTwo .modal-header {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .modal-main {
-  padding-left: 100px;
-  padding-right: 100px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding: 40px 60px;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
+  align-items: center;
 }
 
 .modal-main h3 {
@@ -512,4 +520,62 @@ figure i {
 }
 .forgot-pass {
   text-align: center;
+}
+
+.drop-zone {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: #e8f1f6;
+  width: 100%;
+  padding: 15px;
+}
+.image-upload-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+.fa-image {
+  font-size: 75px;
+  color: #b9c5cc;
+  cursor: pointer;
+}
+
+.image-upload-label button {
+  width: 150px;
+  height: 35px;
+  background-color: #cbd6dc;
+  color: #306685;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.image-upload-label input {
+  display: none;
+}
+
+.title-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title-categories input,
+.title-categories select {
+  width: 420px;
+  height: 50px;
+  border: none;
+  box-shadow: 0 4px 14px 0 #00000017;
+  background-color: white;
+}
+.modalTwo form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
 }
