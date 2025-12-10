@@ -424,15 +424,13 @@ dialog::backdrop {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 590px;
-  height: 615px;
+  width: 100%;
 }
 .modalTwo {
   display: none;
   flex-direction: column;
   align-items: center;
-  width: 590px;
-  height: 615px;
+  width: 100%;
 }
 .modal-header {
   width: 100%;
@@ -488,7 +486,9 @@ figure i {
 }
 .modal-footer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 420px;
   border-top: 1px solid #b3b3b3;
   padding-top: 25px;
@@ -530,7 +530,6 @@ figure i {
   gap: 10px;
   background-color: #e8f1f6;
   width: 100%;
-  padding: 15px;
 }
 .image-upload-icon {
   display: flex;
@@ -544,7 +543,7 @@ figure i {
   cursor: pointer;
 }
 
-.image-upload-label button {
+.drop-zone button {
   width: 150px;
   height: 35px;
   background-color: #cbd6dc;
@@ -554,7 +553,7 @@ figure i {
   font-size: 14px;
   cursor: pointer;
 }
-.image-upload-label input {
+.drop-zone input {
   display: none;
 }
 
@@ -578,4 +577,11 @@ figure i {
   align-items: center;
   gap: 10px;
   width: 100%;
+}
+#img-uploaded {
+  max-width: 130px;
+  height: auto;
+}
+#ext-img {
+  padding: 15px;
 }

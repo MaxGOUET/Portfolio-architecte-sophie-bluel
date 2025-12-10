@@ -2,7 +2,7 @@
 
 const dialog = document.querySelector("dialog");
 const showModify = document.querySelector(".modify");
-const closeModal = document.querySelector(".fa-xmark");
+const closeModal = document.querySelectorAll(".fa-xmark");
 const backDrop = document.querySelector("dialog");
 const addPicture = document.querySelector(".modal-footer button");
 const leftIcon = document.querySelector(".fa-arrow-left");
@@ -21,10 +21,14 @@ function modalTwo() {
 
 showModify.addEventListener("click", () => {
   dialog.showModal();
+  modalOne();
 });
 
-closeModal.addEventListener("click", () => {
-  dialog.close();
+closeModal.forEach((element) => {
+  element.addEventListener("click", () => {
+    clearForm();
+    dialog.close();
+  });
 });
 
 backDrop.addEventListener("click", (event) => {

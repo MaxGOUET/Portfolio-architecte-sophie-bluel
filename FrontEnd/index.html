@@ -104,7 +104,7 @@
           </div>
         </div>
         <div class="modalTwo">
-          <form action="">
+          <form action="" id="upload">
             <div class="modal-header">
               <i class="fa-solid fa-arrow-left"></i>
               <i class="fa-solid fa-xmark"></i>
@@ -112,20 +112,22 @@
             <div class="modal-main">
               <h3>Ajout photo</h3>
               <div class="picture-add">
-                <div class="drop-zone">
-                  <label for="image-upload" class="image-upload-label">
-                    <div class="image-upload-icon">
-                      <i class="fa-regular fa-image"></i>
-                    </div>
+                <label for="image-upload" class="drop-zone">
+                  <img src="" alt="" id="img-uploaded" />
+                  <div id="input-img">
                     <input
                       type="file"
                       id="image-upload"
-                      accept="image/png, image/jpeg"
+                      accept="image/png, image/jpeg, image/jpg"
                     />
+                    <div class="image-upload-icon">
+                      <i class="fa-regular fa-image"></i>
+                    </div>
+
                     <button>+ Ajout photo</button>
-                  </label>
-                  <p>jpg, png : 4mo max</p>
-                </div>
+                    <p id="ext-img">jpg, png : 4mo max</p>
+                  </div>
+                </label>
                 <div class="title-categories">
                   <label for="title">Titre</label>
                   <input type="text" name="title" id="title" />
@@ -135,7 +137,8 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button>Valider</button>
+              <p class="error-message"></p>
+              <input type="submit" value="Valider" id="btn-upload" />
             </div>
           </form>
         </div>

@@ -177,3 +177,80 @@ async function getCategoriesList() {
   });
   categoriesSelect.value = "";
 }
+
+/** on previsualise l'image uploadée */
+
+document.querySelector(".drop-zone").addEventListener("change", previewImage);
+
+function previewImage(e) {
+  const imageUploaded = e.target;
+  const imgPreview = document.getElementById("img-uploaded");
+  if (imageUploaded.files && imageUploaded.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      imgPreview.src = e.target.result;
+    };
+    reader.readAsDataURL(imageUploaded.files[0]);
+    let clearZone = document.getElementById("input-img");
+    clearZone.style.display = "none";
+  }
+}
+
+/** on envoi les données du formulaire à l'API */
+const formUploadImg = document.getElementById("upload");
+const imgPreview = document.getElementById("img-uploaded");
+const imageUploadInput = document.getElementById("image-upload");
+const titleInput = document.getElementById("title");
+const categoriesSelect = document.getElementById("categories");
+
+formUploadImg.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  await submitForm();
+});
+
+const errorMessage = document.querySelector(".error-message");
+async function submitForm() {
+  const imageFile = imageUploadInput.files[0];
+  const title = titleInput.value;
+  const categoryId = categoriesSelect.value;
+  /** Vérifier que tous les champs sont remplis */
+  if (!imageFile || !title || !categoryId) {
+    errorMessage.innerText = "Veuillez remplir tous les champs.";
+    return;
+  }
+  // Créer un FormData pour envoyer l'image et les données
+  const formData = new FormData();
+  formData.append("image", imageFile);
+  formData.append("title", title);
+  formData.append("category", categoryId);
+  try {
+    const response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+    if (!response.ok) {
+      throw new Error(`Erreur: ${response.status}`);
+    }
+    const result = await response.json();
+    console.log(result);
+    clearForm();
+    // Actualiser la galerie
+    showResult();
+    // Fermer la modale
+    const dialog = document.querySelector("dialog");
+    dialog.close();
+  } catch (error) {
+    console.error(error.message);
+    errorMessage.innerText = "Erreur lors de l'ajout du projet.";
+  }
+}
+// Réinitialiser le formulaire
+function clearForm() {
+  formUploadImg.reset();
+  imgPreview.src = "";
+  document.getElementById("input-img").style.display = "block";
+  errorMessage.innerText = "";
+}
