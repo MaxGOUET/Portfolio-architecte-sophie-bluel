@@ -34,15 +34,15 @@ async function getDataCategories() {
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters");
 
-function showResult() {
-  createGallery();
-  createGalleryModal();
+async function showResult() {
+  let results = await getDataWorks();
+  createGallery(results);
+  createGalleryModal(results);
   getCategoriesList();
 }
 /**affichage de la gallerie */
-async function createGallery() {
+function createGallery(results) {
   gallery.innerHTML = "";
-  let results = await getDataWorks();
   results.forEach((element) => {
     let figure = document.createElement("figure");
     figure.dataset.categoryId = element.categoryId;
@@ -58,9 +58,8 @@ async function createGallery() {
 }
 /**modale */
 let galleryModify = document.querySelector(".picture-remove");
-async function createGalleryModal() {
+function createGalleryModal(results) {
   galleryModify.innerHTML = "";
-  let results = await getDataWorks();
   results.forEach((element) => {
     let figure = document.createElement("figure");
     figure.dataset.workId = element.id;
@@ -214,12 +213,12 @@ async function submitForm() {
   const imageFile = imageUploadInput.files[0];
   const title = titleInput.value;
   const categoryId = categoriesSelect.value;
-  /** Vérifier que tous les champs sont remplis */
+  /** on vérifie que tous les champs sont remplis */
   if (!imageFile || !title || !categoryId) {
     errorMessage.innerText = "Veuillez remplir tous les champs.";
     return;
   }
-  // Créer un FormData pour envoyer l'image et les données
+  // on créer le FormData pour envoyer l'image et les données
   const formData = new FormData();
   formData.append("image", imageFile);
   formData.append("title", title);
@@ -238,11 +237,8 @@ async function submitForm() {
     const result = await response.json();
     console.log(result);
     clearForm();
-    // Actualiser la galerie
+    // on actualise la galerie
     showResult();
-    // Fermer la modale
-    const dialog = document.querySelector("dialog");
-    dialog.close();
   } catch (error) {
     console.error(error.message);
     errorMessage.innerText = "Erreur lors de l'ajout du projet.";
