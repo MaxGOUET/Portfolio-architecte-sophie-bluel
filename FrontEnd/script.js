@@ -168,6 +168,7 @@ function log() {
 
 async function getCategoriesList() {
   const categoriesSelect = document.getElementById("categories");
+  categoriesSelect.innerHTML = "";
   let resultsCat = await getDataCategories();
   resultsCat.forEach((element) => {
     let option = document.createElement("option");
@@ -251,6 +252,7 @@ async function submitForm() {
 function clearForm() {
   formUploadImg.reset();
   imgPreview.src = "";
+  categoriesSelect.value = "";
   document.getElementById("input-img").style.display = "block";
   errorMessage.innerText = "";
 }

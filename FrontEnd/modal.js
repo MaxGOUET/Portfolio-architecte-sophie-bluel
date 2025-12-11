@@ -40,6 +40,7 @@ backDrop.addEventListener("click", (event) => {
 
 addPicture.addEventListener("click", () => {
   modalTwo();
+  clearForm();
 });
 leftIcon.addEventListener("click", () => {
   modalOne();
