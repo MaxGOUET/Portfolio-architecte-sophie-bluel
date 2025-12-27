@@ -41,6 +41,7 @@ backDrop.addEventListener("click", (event) => {
 addPicture.addEventListener("click", () => {
   modalTwo();
   clearForm();
+  submitButton.classList.remove("btn-upload-enabled");
 });
 leftIcon.addEventListener("click", () => {
   modalOne();

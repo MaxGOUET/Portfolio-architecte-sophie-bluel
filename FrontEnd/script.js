@@ -182,6 +182,28 @@ async function getCategoriesList() {
 
 document.querySelector(".drop-zone").addEventListener("change", previewImage);
 
+// Drag and drop functionality
+const dropZone = document.querySelector(".drop-zone");
+/**fonction de drag and drop sur la modale 2 */
+dropZone.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+});
+
+dropZone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  const files = e.dataTransfer.files;
+  if (files && files.length > 0) {
+    const file = files[0];
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    imageUploadInput.files = dataTransfer.files;
+    previewImage({ target: imageUploadInput });
+  }
+});
+
+/** fonction de preview de l'image uploadée */
 function previewImage(e) {
   const imageUploaded = e.target;
   const imgPreview = document.getElementById("img-uploaded");
@@ -251,4 +273,21 @@ function clearForm() {
   categoriesSelect.value = "";
   document.getElementById("input-img").style.display = "block";
   errorMessage.innerText = "";
+}
+
+/** on verifie les champs sur les changements et si ils sont tous remplis on change la couleur du bouton  */
+imageUploadInput.addEventListener("change", validateForm);
+titleInput.addEventListener("input", validateForm);
+categoriesSelect.addEventListener("change", validateForm);
+const submitButton = document.getElementById("btn-upload");
+
+function validateForm() {
+  const imageFile = imageUploadInput.files[0];
+  const title = titleInput.value;
+  const categoryId = categoriesSelect.value;
+  if (imageFile && title && categoryId) {
+    submitButton.classList.add("btn-upload-enabled");
+  } else {
+    submitButton.classList.remove("btn-upload-enabled");
+  }
 }

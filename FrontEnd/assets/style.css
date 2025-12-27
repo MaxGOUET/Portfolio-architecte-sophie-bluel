@@ -585,21 +585,29 @@ figure i {
 #ext-img {
   padding: 15px;
 }
-#btn-upload {
-  background-color: #1d6154;
-  color: white;
-  border: 1px solid #1d6154;
-  width: 180px;
-  height: 35px;
-  border-radius: 60px;
-  margin-top: 15px;
+.btn-upload-enabled {
+  background-color: #1d6154 !important;
+  color: white !important;
+  border: 1px solid #1d6154 !important;
 }
-#btn-upload:disabled {
-  background-color: grey;
-  border: 1px solid grey;
+#btn-upload {
+  background-color: #a7a7a7;
+  border: 1px solid #a7a7a7;
   color: white;
   width: 180px;
   height: 35px;
   border-radius: 60px;
   margin-top: 15px;
+  cursor: not-allowed;
+}
+
+select,
+select::picker(select) {
+  appearance: base-select;
+  padding-right: 5%;
+  padding-top: 20px;
+}
+select::picker-icon {
+  content: "⌵";
+  color: black;
 }
