@@ -231,8 +231,14 @@ const categoriesSelect = document.getElementById("categories");
 
 formUploadImg.addEventListener("submit", async (event) => {
   event.preventDefault();
-  await submitForm();
-  submitButton.classList.remove("btn-upload-enabled");
+  let token = localStorage.getItem("token");
+  if (token === null) {
+    errorMessage.innerText = "Vous devez être connecté pour ajouter un projet.";
+    return;
+  } else {
+    await submitForm();
+    submitButton.classList.remove("btn-upload-enabled");
+  }
 });
 
 const errorMessage = document.querySelector(".error-message");

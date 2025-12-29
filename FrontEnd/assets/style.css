@@ -299,6 +299,7 @@ footer nav ul {
 .filters button:hover {
   background-color: #1d6154;
   color: white;
+  cursor: pointer;
 }
 
 .filters .active-filter {
