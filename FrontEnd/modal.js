@@ -1,4 +1,4 @@
-/****on recupére les element de la modale et on ajoute les listeners */
+// gestion de la modale // ouverture et fermeture
 
 const dialog = document.querySelector("dialog");
 const showModify = document.querySelector(".modify");
@@ -36,7 +36,6 @@ backDrop.addEventListener("click", (event) => {
     dialog.close();
   }
 });
-/** on ajoute les elements works avec fetch */
 
 addPicture.addEventListener("click", () => {
   modalTwo();
@@ -46,4 +45,3 @@ addPicture.addEventListener("click", () => {
 leftIcon.addEventListener("click", () => {
   modalOne();
 });
-/*** on supprime les elements */
