@@ -194,14 +194,15 @@ a {
 #introduction {
   display: flex;
   align-items: center;
+  margin: 100px 50px 100px 50px;
+  gap: 80px;
 }
 #introduction figure {
   flex: 1;
 }
 #introduction img {
   display: block;
-  margin: auto;
-  width: 80%;
+  width: 100%;
 }
 
 #introduction article {
@@ -221,6 +222,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 45px;
+  margin: 100px 50px 100px 50px;
 }
 .gallery {
   width: 100%;
