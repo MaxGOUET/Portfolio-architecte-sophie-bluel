@@ -56,44 +56,6 @@ function createGallery(results) {
     figCaption.innerText = element.title;
   });
 }
-/**modale */
-let galleryModify = document.querySelector(".picture-remove");
-function createGalleryModal(results) {
-  galleryModify.innerHTML = "";
-  results.forEach((element) => {
-    let figure = document.createElement("figure");
-    figure.dataset.workId = element.id;
-    galleryModify.appendChild(figure);
-    let imgGallery = document.createElement("img");
-    figure.appendChild(imgGallery);
-    imgGallery.src = element.imageUrl;
-    imgGallery.alt = element.title;
-    let removeIcon = document.createElement("i");
-    figure.appendChild(removeIcon);
-    removeIcon.className = "fa-solid fa-trash-can";
-  });
-  removePicture();
-}
-
-function removePicture() {
-  const trashCan = document.querySelectorAll(".picture-remove i");
-  trashCan.forEach((el) => {
-    el.addEventListener("click", (event) => {
-      let iPicture = event.target.parentNode.dataset.workId;
-      fetch(`http://localhost:5678/api/works/${iPicture}`, {
-        method: "DELETE",
-        headers: { accept: "*/*", Authorization: `Bearer ${token}` },
-      }).then((response) => {
-        response.json();
-        if (response.status == 204) {
-          showResult();
-        } else {
-          console.log(response);
-        }
-      });
-    });
-  });
-}
 
 // on creer les boutons de filtrages des elements
 async function showFilters() {
@@ -163,6 +125,47 @@ function log() {
     localStorage.removeItem("token");
   });
 }
+
+/**MODALE */
+
+let galleryModify = document.querySelector(".picture-remove");
+function createGalleryModal(results) {
+  galleryModify.innerHTML = "";
+  results.forEach((element) => {
+    let figure = document.createElement("figure");
+    figure.dataset.workId = element.id;
+    galleryModify.appendChild(figure);
+    let imgGallery = document.createElement("img");
+    figure.appendChild(imgGallery);
+    imgGallery.src = element.imageUrl;
+    imgGallery.alt = element.title;
+    let removeIcon = document.createElement("i");
+    figure.appendChild(removeIcon);
+    removeIcon.className = "fa-solid fa-trash-can";
+  });
+  removePicture();
+}
+
+function removePicture() {
+  const trashCan = document.querySelectorAll(".picture-remove i");
+  trashCan.forEach((el) => {
+    el.addEventListener("click", (event) => {
+      let iPicture = event.target.parentNode.dataset.workId;
+      fetch(`http://localhost:5678/api/works/${iPicture}`, {
+        method: "DELETE",
+        headers: { accept: "*/*", Authorization: `Bearer ${token}` },
+      }).then((response) => {
+        response.json();
+        if (response.status == 204) {
+          showResult();
+        } else {
+          console.log(response);
+        }
+      });
+    });
+  });
+}
+
 /** on recupére les catégories pour les afficher dans la liste déroulante */
 
 async function getCategoriesList() {
@@ -182,7 +185,7 @@ async function getCategoriesList() {
 
 document.querySelector(".drop-zone").addEventListener("change", previewImage);
 
-// Drag and drop functionality
+/** Drag and drop fonctionnalité */
 const dropZone = document.querySelector(".drop-zone");
 /**fonction de drag and drop sur la modale 2 */
 dropZone.addEventListener("dragover", (e) => {
