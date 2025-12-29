@@ -589,6 +589,7 @@ figure i {
   background-color: #1d6154 !important;
   color: white !important;
   border: 1px solid #1d6154 !important;
+  cursor: pointer !important;
 }
 #btn-upload {
   background-color: #a7a7a7;

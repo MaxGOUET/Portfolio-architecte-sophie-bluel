@@ -69,6 +69,7 @@ function createFilters(resultsCat) {
   filters.appendChild(btnFilterAll);
   btnFilterAll.innerText = "Tous";
   btnFilterAll.id = "btnAll";
+  btnFilterAll.classList.add("active-filter");
   btnFilterAll.addEventListener("click", () => {
     document.querySelectorAll(".filters button").forEach((btn) => {
       btn.classList.remove("active-filter");
@@ -231,6 +232,7 @@ const categoriesSelect = document.getElementById("categories");
 formUploadImg.addEventListener("submit", async (event) => {
   event.preventDefault();
   await submitForm();
+  submitButton.classList.remove("btn-upload-enabled");
 });
 
 const errorMessage = document.querySelector(".error-message");
