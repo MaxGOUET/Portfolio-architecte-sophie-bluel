@@ -8,7 +8,7 @@ form.addEventListener("submit", (event) => {
   const data = Object.fromEntries(formData);
   console.log(formData);
 
-  if (data.email === "" || data.password === "") {
+  if (!data.email || !data.password) {
     errorMessage.classList = "error-message";
     errorDiv.appendChild(errorMessage);
     errorMessage.innerText = "Erreur dans l’identifiant ou le mot de passe";
