@@ -211,7 +211,13 @@ dropZone.addEventListener("drop", (e) => {
 function previewImage(e) {
   const imageUploaded = e.target;
   const imgPreview = document.getElementById("img-uploaded");
-  if (imageUploaded.files && imageUploaded.files[0]) {
+  if (
+    imageUploaded.files &&
+    imageUploaded.files[0] &&
+    (imageUploaded.files[0].type == "image/jpeg" ||
+      imageUploaded.files[0].type == "image/png" ||
+      imageUploaded.files[0].type == "image/jpg")
+  ) {
     const reader = new FileReader();
     reader.onload = function (e) {
       imgPreview.src = e.target.result;
@@ -219,6 +225,12 @@ function previewImage(e) {
     reader.readAsDataURL(imageUploaded.files[0]);
     let clearZone = document.getElementById("input-img");
     clearZone.style.display = "none";
+  } else {
+    imgPreview.src = "";
+    let clearZone = document.getElementById("input-img");
+    clearZone.style.display = "block";
+    errorMessage.innerText =
+      "Le fichier doit être une image (jpg, jpeg, png) et ne pas dépasser 4 Mo.";
   }
 }
 
@@ -243,38 +255,48 @@ formUploadImg.addEventListener("submit", async (event) => {
 
 const errorMessage = document.querySelector(".error-message");
 async function submitForm() {
-  const imageFile = imageUploadInput.files[0];
-  const title = titleInput.value;
-  const categoryId = categoriesSelect.value;
-  /** on vérifie que tous les champs sont remplis */
-  if (!imageFile || !title || !categoryId) {
-    errorMessage.innerText = "Veuillez remplir tous les champs.";
-    return;
-  }
-  // on créer le FormData pour envoyer l'image et les données
-  const formData = new FormData();
-  formData.append("image", imageFile);
-  formData.append("title", title);
-  formData.append("category", categoryId);
-  try {
-    const response = await fetch("http://localhost:5678/api/works", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    });
-    if (!response.ok) {
-      throw new Error(`Erreur: ${response.status}`);
+  if (
+    imageUploadInput.files[0].size <= 4 * 1024 * 1024 &&
+    (imageUploadInput.files[0].type == "image/jpeg" ||
+      imageUploadInput.files[0].type == "image/png" ||
+      imageUploadInput.files[0].type == "image/jpg")
+  ) {
+    const imageFile = imageUploadInput.files[0];
+    const title = titleInput.value;
+    const categoryId = categoriesSelect.value;
+    /** on vérifie que tous les champs sont remplis */
+    if (!imageFile || !title || !categoryId) {
+      errorMessage.innerText = "Veuillez remplir tous les champs.";
+      return;
     }
-    const result = await response.json();
-    console.log(result);
-    clearForm();
-    // on actualise la galerie
-    showResult();
-  } catch (error) {
-    console.error(error.message);
-    errorMessage.innerText = "Erreur lors de l'ajout du projet.";
+    // on créer le FormData pour envoyer l'image et les données
+    const formData = new FormData();
+    formData.append("image", imageFile);
+    formData.append("title", title);
+    formData.append("category", categoryId);
+    try {
+      const response = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error(`Erreur: ${response.status}`);
+      }
+      const result = await response.json();
+      console.log(result);
+      clearForm();
+      // on actualise la galerie
+      showResult();
+    } catch (error) {
+      console.error(error.message);
+      errorMessage.innerText = "Erreur lors de l'ajout du projet.";
+    }
+  } else {
+    errorMessage.innerText =
+      "Le fichier doit être une image (jpg, jpeg, png) et ne pas dépasser 4 Mo.";
   }
 }
 // Réinitialiser le formulaire
